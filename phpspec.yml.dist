@@ -1,0 +1,7 @@
+suites:
+    default:
+        namespace: Webuni\Bundle\CommonMarkBundle
+        psr4_prefix: Webuni\Bundle\CommonMarkBundle
+
+extensions:
+  - Coduo\PhpSpec\DataProvider\DataProviderExtension

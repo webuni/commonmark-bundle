@@ -1,0 +1,38 @@
+{
+    "name": "webuni/commonmark-bundle",
+    "type": "symfony-bundle",
+    "description": "The table extension for CommonMark PHP implementation",
+    "keywords": ["markdown","symfony","bundle","commonmark"],
+    "homepage": "https://github.com/webuni/commonmark-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Hasoň",
+            "email": "martin.hason@gmail.com",
+            "role": "Lead Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/http-kernel": "^2.3",
+        "symfony/config": "^2.3",
+        "symfony/dependency-injection": "^2.3",
+        "league/commonmark": "~0.7"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.2",
+        "coduo/phpspec-data-provider-extension": "^1.0",
+        "bossa/phpspec2-expect": "^1.0",
+        "fabpot/php-cs-fixer": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webuni\\Bundle\\CommonMarkBundle\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

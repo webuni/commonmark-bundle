@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="webuni_commonmark.converter" class="League\CommonMark\Converter" public="false" abstract="true">
+            <argument type="service" id="webuni_commonmark.docparser" />
+            <argument type="service" id="webuni_commonmark.htmlrenderer" />
+        </service>
+
+        <service id="webuni_commonmark.environment" class="League\CommonMark\Environment" public="false" abstract="true">
+            <factory class="League\CommonMark\Environment" method="createCommonMarkEnvironment" />
+        </service>
+
+        <service id="webuni_commonmark.default_environment" class="League\CommonMark\Environment" parent="webuni_commonmark.environment"></service>
+
+        <service id="webuni_commonmark.docparser" class="League\CommonMark\DocParser" public="false" abstract="true">
+            <argument type="service" id="webuni_commonmark.environment" />
+        </service>
+
+        <service id="webuni_commonmark.htmlrenderer" class="League\CommonMark\HtmlRenderer" public="false" abstract="true">
+            <argument type="service" id="webuni_commonmark.environment" />
+        </service>
+
+        <service id="webuni_commonmark.converter_registry" class="Webuni\Bundle\CommonMarkBundle\ConverterRegistry">
+            <argument type="collection"></argument>
+        </service>
+    </services>
+</container>
