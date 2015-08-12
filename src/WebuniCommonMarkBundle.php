@@ -14,11 +14,21 @@ namespace Webuni\Bundle\CommonMarkBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler\CommonMarkExtensionPass;
+use Webuni\Bundle\CommonMarkBundle\DependencyInjection\WebuniCommonMarkExtension;
 
 class WebuniCommonMarkBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new CommonMarkExtensionPass());
+    }
+
+    public function getContainerExtension()
+    {
+        if (null === $this->extension) {
+            $this->extension = new WebuniCommonMarkExtension();
+        }
+
+        return $this->extension;
     }
 }

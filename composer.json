@@ -17,7 +17,7 @@
         "symfony/http-kernel": "^2.3",
         "symfony/config": "^2.3",
         "symfony/dependency-injection": "^2.3",
-        "league/commonmark": "~0.7"
+        "league/commonmark": "~0.9"
     },
     "require-dev": {
         "webuni/commonmark-table-extension": "~0.3",
