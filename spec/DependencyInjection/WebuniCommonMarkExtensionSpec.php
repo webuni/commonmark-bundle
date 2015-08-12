@@ -12,8 +12,8 @@
 namespace spec\Webuni\Bundle\CommonMarkBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler\CommonMarkExtensionPass;
 use Webuni\Bundle\CommonMarkBundle\DependencyInjection\WebuniCommonMarkExtension;
 
 /**
@@ -38,15 +38,25 @@ class WebuniCommonMarkExtensionSpec extends ObjectBehavior
         $this->load([], $builder);
 
         $converters = $builder->getDefinition('webuni_commonmark.converter_registry')->getArgument(0);
+        expect($converters)->shouldHaveCount(1);
         expect($converters)->shouldHaveKey('default');
     }
 
-    public function it_should_be_compilabl()
+    public function it_should_compile_default_converter_and_add_default_extensions()
     {
         $builder = new ContainerBuilder();
+        $builder->addCompilerPass(new CommonMarkExtensionPass());
 
         $this->load([], $builder);
         $builder->compile();
-        var_dump($builder->get('webuni_commonmark.converter_registry'));
+
+        expect($builder->getServiceIds())->shouldBe(['webuni_commonmark.converter_registry', 'webuni_commonmark.default_converter', 'service_container']);
+
+        $environment = $builder->getDefinition('webuni_commonmark.default_converter')->getArgument(0)->getArgument(0);
+        $calls = $environment->getMethodCalls();
+        expect($calls)->shouldHaveCount(3);
+        expect($calls[0][0])->shouldBe('addExtension');
+        expect($calls[1][0])->shouldBe('addExtension');
+        expect($calls[2][0])->shouldBe('mergeConfig');
     }
 }

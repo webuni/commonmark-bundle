@@ -20,6 +20,8 @@
         "league/commonmark": "~0.7"
     },
     "require-dev": {
+        "webuni/commonmark-table-extension": "~0.3",
+        "webuni/commonmark-attributes-extension": "~0.2",
         "phpspec/phpspec": "^2.2",
         "coduo/phpspec-data-provider-extension": "^1.0",
         "bossa/phpspec2-expect": "^1.0",

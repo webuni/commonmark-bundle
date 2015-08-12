@@ -19,14 +19,21 @@ class CommonMarkExtensionPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (false === $container->hasDefinition('webuni_commonmark.default_environment')) {
-            return;
-        }
-
-        $definition = $container->getDefinition('webuni_commonmark.default_environment');
+        $extensions = [];
         foreach ($container->findTaggedServiceIds('webuni_commonmark.extension') as $id => $tag) {
             $alias = isset($tag[0]['alias']) ? $tag[0]['alias'] : $id;
-            $definition->addMethodCall('addExtension', [new Reference($id), $alias]);
+            $extensions[$alias] = $id;
+        }
+
+        if ($container->hasDefinition('webuni_commonmark.default_environment')) {
+            $definition = $container->getDefinition('webuni_commonmark.default_environment');
+            foreach ($extensions as $alias => $id) {
+                $definition->addMethodCall('addExtension', [new Reference($id)]);
+            }
+        }
+
+        foreach ($container->findTaggedServiceIds('webuni_commonmark.environment.extensions') as $id => $tag) {
+            // todo
         }
     }
 }

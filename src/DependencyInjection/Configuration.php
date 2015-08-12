@@ -24,14 +24,21 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('default_converter')->defaultValue('default')->end()
+                ->arrayNode('extensions')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('attributes')->defaultTrue()->end()
+                        ->booleanNode('table')->defaultTrue()->end()
+                    ->end()
+                ->end()
                 ->arrayNode('converters')
                     ->defaultValue(['default' => [
-                        'converter' => 'webuni_commonmark.converter',
+                        'converter'   => 'webuni_commonmark.converter',
                         'environment' => 'webuni_commonmark.default_environment',
-                        'parser' => 'webuni_commonmark.docparser',
-                        'renderer' => 'webuni_commonmark.htmlrenderer',
-                        'config' => [],
-                        'extensions' => []
+                        'parser'      => 'webuni_commonmark.docparser',
+                        'renderer'    => 'webuni_commonmark.htmlrenderer',
+                        'config'      => [],
+                        'extensions'  => [],
                     ]])
                     ->beforeNormalization()
                         ->always()

@@ -28,3 +28,21 @@ public function registerBundles()
     );
 }
 ```
+
+Defined DI Tags
+---------------
+
+This bundle handles the following Dependency Injection Tags:
+
+    webuni_commonmark.extension: To add a implementation of League\CommonMark\Extension\ExtensionInterface to the default environment.
+
+To add the CommonMark Table Extension add the following to your app/config/sculpin_services.yml:
+
+```yaml
+# app/config/sculpin_services.yml
+services:
+    app.commonamrk_table_extension:
+        class: Webuni\CommonMark\TableExtension\TableExtension
+        tags:
+            - name: webuni_commonmark.extension
+```

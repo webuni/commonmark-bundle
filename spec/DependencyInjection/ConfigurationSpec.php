@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Webuni\Bundle\CommonMarkBundle\DependencyInjection\Configuration;
 
 /**
- * @mixin Configuration
+ * @mixin \Webuni\Bundle\CommonMarkBundle\DependencyInjection\Configuration
  */
 class ConfigurationSpec extends ObjectBehavior
 {
@@ -37,13 +37,18 @@ class ConfigurationSpec extends ObjectBehavior
 
     public function get_configuration()
     {
+        $extensions = [
+            'attributes' => true,
+            'table'      => true,
+        ];
+
         $converter = [
-            'converter' => 'webuni_commonmark.converter',
+            'converter'   => 'webuni_commonmark.converter',
             'environment' => 'webuni_commonmark.default_environment',
-            'parser' => 'webuni_commonmark.docparser',
-            'renderer' => 'webuni_commonmark.htmlrenderer',
-            'config' => [],
-            'extensions' => [],
+            'parser'      => 'webuni_commonmark.docparser',
+            'renderer'    => 'webuni_commonmark.htmlrenderer',
+            'config'      => [],
+            'extensions'  => [],
         ];
 
         return [
@@ -51,27 +56,30 @@ class ConfigurationSpec extends ObjectBehavior
                 [],
                 [
                     'default_converter' => 'default',
-                    'converters' => [
+                    'extensions'        => $extensions,
+                    'converters'        => [
                         'default' => $converter,
-                    ]
+                    ],
                 ],
             ],
             [
-                ['converters' => ['custom' => null,]],
+                ['converters' => ['custom' => null]],
                 [
                     'converters' => [
                         'default' => $converter,
-                        'custom' => $converter,
+                        'custom'  => $converter,
                     ],
                     'default_converter' => 'default',
+                    'extensions'        => $extensions,
                 ],
             ],
             [
-                ['converters' => ['default' => ['config' => ['foo' => 'bar']]]],
+                ['converters' => ['default' => ['config' => ['foo' => 'bar']]], 'extensions' => ['attributes' => false]],
                 [
                     'converters' => [
                         'default' => ['config' => ['foo' => 'bar']] + $converter,
                     ],
+                    'extensions'        => ['attributes' => false] + $extensions,
                     'default_converter' => 'default',
                 ],
             ],

@@ -27,7 +27,7 @@ class WebuniCommonMarkBundleSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function it_should_register_dependency_injection_compiler_for_commonmark_extensions($container)
     {
