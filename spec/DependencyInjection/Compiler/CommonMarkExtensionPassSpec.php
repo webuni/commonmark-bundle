@@ -13,9 +13,12 @@ namespace spec\Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler\CommonMarkExtensionPass;
 
 /**
- * @mixin \Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler\CommonMarkExtensionPass
+ * @mixin CommonMarkExtensionPass
  */
 class CommonMarkExtensionPassSpec extends ObjectBehavior
 {
@@ -24,11 +27,7 @@ class CommonMarkExtensionPassSpec extends ObjectBehavior
         $this->shouldHaveType('Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler\CommonMarkExtensionPass');
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param \Symfony\Component\DependencyInjection\Definition       $definition
-     */
-    public function it_should_register_extension($container, $definition)
+    public function it_should_register_extension(ContainerBuilder $container, Definition $definition)
     {
         $container->getDefinition('webuni_commonmark.default_environment')->willReturn($definition);
         $container->findTaggedServiceIds('webuni_commonmark.extension')->willReturn(['my_service' => []]);

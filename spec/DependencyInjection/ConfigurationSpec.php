@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Webuni\Bundle\CommonMarkBundle\DependencyInjection\Configuration;
 
 /**
- * @mixin \Webuni\Bundle\CommonMarkBundle\DependencyInjection\Configuration
+ * @mixin Configuration
  */
 class ConfigurationSpec extends ObjectBehavior
 {
@@ -28,7 +28,7 @@ class ConfigurationSpec extends ObjectBehavior
     /**
      * @dataProvider get_configuration
      */
-    public function it_should_process_configuration(array $config, array $expected)
+    public function it_should_process_configuration(array $config, $expected)
     {
         $processor = new Processor();
 

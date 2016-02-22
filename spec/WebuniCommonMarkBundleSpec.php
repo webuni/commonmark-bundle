@@ -13,6 +13,7 @@ namespace spec\Webuni\Bundle\CommonMarkBundle;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class WebuniCommonMarkBundleSpec extends ObjectBehavior
 {
@@ -26,10 +27,7 @@ class WebuniCommonMarkBundleSpec extends ObjectBehavior
         $this->shouldBeAnInstanceOf('Symfony\Component\HttpKernel\Bundle\Bundle');
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function it_should_register_dependency_injection_compiler_for_commonmark_extensions($container)
+    public function it_should_register_dependency_injection_compiler_for_commonmark_extensions(ContainerBuilder $container)
     {
         $container->addCompilerPass(Argument::type('Webuni\Bundle\CommonMarkBundle\DependencyInjection\Compiler\CommonMarkExtensionPass'))->shouldBeCalled();
 

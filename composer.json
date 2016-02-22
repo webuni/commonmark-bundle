@@ -13,16 +13,17 @@
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "symfony/http-kernel": "^2.3",
-        "symfony/config": "^2.3",
-        "symfony/dependency-injection": "^2.3",
+        "php": "^5.4|^7.0",
+        "symfony/http-kernel": "^2.3|^3.0",
+        "symfony/config": "^2.3|^3.0",
+        "symfony/dependency-injection": "^2.3|^3.0",
         "league/commonmark": "~0.9"
     },
     "require-dev": {
         "webuni/commonmark-table-extension": "~0.3",
         "webuni/commonmark-attributes-extension": "~0.2",
-        "phpspec/phpspec": "^2.2",
+        "webuni/commonmark-twig-renderer": "~0.1",
+        "phpspec/phpspec": "^2.4",
         "coduo/phpspec-data-provider-extension": "^1.0",
         "bossa/phpspec2-expect": "^1.0",
         "fabpot/php-cs-fixer": "^1.9"
