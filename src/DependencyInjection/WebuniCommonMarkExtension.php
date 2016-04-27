@@ -17,6 +17,8 @@ use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
+use Webuni\CommonMark\AttributesExtension\AttributesExtension;
+use Webuni\CommonMark\TableExtension\TableExtension;
 
 class WebuniCommonMarkExtension extends ConfigurableExtension
 {
@@ -25,11 +27,11 @@ class WebuniCommonMarkExtension extends ConfigurableExtension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        if ($mergedConfig['extensions']['attributes'] && class_exists('Webuni\CommonMark\AttributesExtension\AttributesExtension')) {
+        if ($mergedConfig['extensions']['attributes'] && class_exists(AttributesExtension::class)) {
             $loader->load('extensions/attributes.xml');
         }
 
-        if ($mergedConfig['extensions']['table'] && class_exists('Webuni\CommonMark\TableExtension\TableExtension')) {
+        if ($mergedConfig['extensions']['table'] && class_exists(TableExtension::class)) {
             $loader->load('extensions/table.xml');
         }
 
