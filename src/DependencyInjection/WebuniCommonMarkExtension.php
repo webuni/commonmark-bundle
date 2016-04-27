@@ -53,7 +53,6 @@ class WebuniCommonMarkExtension extends ConfigurableExtension
     {
         $environment = new DefinitionDecorator($config['environment']);
         $environment->setPublic(false);
-        $environment->setClass($container->getDefinition($config['environment'])->getClass());
         $environment->addMethodCall('mergeConfig', [$config['config']]);
         $environment->addTag('webuni_commonmark.environment.extensions', $config['extensions']);
         // $environment->addTag('webuni_commonmark.environment', ['parent' => $config['environment'], 'extensions' => [$config['extensions']]);
@@ -63,17 +62,14 @@ class WebuniCommonMarkExtension extends ConfigurableExtension
 
         $parser = new DefinitionDecorator($config['parser']);
         $parser->setPublic(false);
-        $parser->setClass($container->getDefinition($config['parser'])->getClass());
         $parser->replaceArgument(0, new Reference($environmentName));
 
         $renderer = new DefinitionDecorator($config['renderer']);
         $renderer->setPublic(false);
-        $renderer->setClass($container->getDefinition($config['renderer'])->getClass());
         $renderer->replaceArgument(0, new Reference($environmentName));
 
         $converter = new DefinitionDecorator($config['converter']);
         $converter->setPublic(true);
-        $converter->setClass($container->getDefinition($config['converter'])->getClass());
         $converter->replaceArgument(0, $parser);
         $converter->replaceArgument(1, $renderer);
 
