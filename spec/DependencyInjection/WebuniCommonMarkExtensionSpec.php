@@ -50,7 +50,11 @@ class WebuniCommonMarkExtensionSpec extends ObjectBehavior
         $this->load([], $builder);
         $builder->compile();
 
-        expect($builder->getServiceIds())->shouldBe(['webuni_commonmark.converter_registry', 'webuni_commonmark.default_converter', 'service_container']);
+        $serviceIds = $builder->getServiceIds();
+        $expectedServiceIds = ['webuni_commonmark.converter_registry', 'webuni_commonmark.default_converter', 'service_container'];
+        sort($serviceIds);
+        sort($expectedServiceIds);
+        expect($serviceIds)->shouldBe($expectedServiceIds);
 
         $environment = $builder->getDefinition('webuni_commonmark.default_converter')->getArgument(0)->getArgument(0);
         $calls = $environment->getMethodCalls();
