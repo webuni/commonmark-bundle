@@ -28,7 +28,7 @@ class ConfigurationSpec extends ObjectBehavior
     /**
      * @dataProvider get_configuration
      */
-    public function it_should_process_configuration(array $config, $expected)
+    public function it_should_process_configuration($config, $expected)
     {
         $processor = new Processor();
 
